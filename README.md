@@ -9,14 +9,14 @@ This project implements a Deep Q-Network (DQN) agent to play the Atari Boxing ga
 
 ## Implementation
 
-### Understanding of DQN and RL Concepts
+### 1. Understanding of DQN and RL Concepts
 Our implementation demonstrates:
 - Proper handling of exploration-exploitation tradeoff using ε-greedy policy
 - Experience replay buffer for training stability
 - Target network implementation to prevent oscillation
 - Frame stacking to capture temporal information
 
-## ### Hyperparameter Tuning
+### 2. Hyperparameter Tuning Results
 Performance Metrics
 Our DQN agent achieved excellent results during evaluation:
 
@@ -31,16 +31,21 @@ Our DQN agent achieved excellent results during evaluation:
 - Episode 2: 23.8 reward (432 steps)
 - Episode 3: 23.7 reward (437 steps)
 
-## Tested Configurations
+***Tested Configurations**
 We conducted rigorous experimentation with 5 distinct configurations, observing these key behaviors:
 
-| Trial | lr     | γ    | Batch | ε_start | ε_end | ε_decay | Observed Behavior | Reward (μ ± σ) |
-|-------|--------|------|-------|---------|-------|---------|-------------------|----------------|
-| 1 | 1.0e-3 | 0.99 | 32 | 1.0 | 0.1 | 0.1 | **Violent policy oscillations**: The high learning rate caused the agent to frequently "forget" strategies, alternating between aggressive punching bursts (+15 reward) and complete defensive collapses (-5 reward). Episode lengths varied wildly (200-500 steps) with no consistent rhythm. | 15.2 ± 4.1 |
-| 2 | 1.0e-4 | 0.95 | 64 | 1.0 | 0.05 | 0.2 | **Overcautious jabber**: The low gamma created a myopic agent that: <br>• Threw single punches then retreated <br>• Failed to develop combo strategies <br>• Had predictable movement patterns (~350 step episodes) | 18.2 ± 1.5 |
-| 3 | 6.0e-4 | 0.99 | 32 | 1.0 | 0.01 | 0.15 | **Early specialist**: Quickly learned basic tactics (reached +20 reward by 100k steps) but then: <br>• Got stuck repeating the same 2-3 punch combos <br>• Showed no adaptation to opponent patterns <br>• Failed to discover advanced techniques | 20.1 ± 0.8 |
-| 4 | 3.0e-4 | 0.997| 48 | 1.0 | 0.1 | 0.1 | **Calculated counter-puncher**: The high gamma produced: <br>• Excellent defensive positioning (~400 step episodes) <br>• Occasional hesitation before attacking <br>• Strong but not optimal combo execution | 22.5 ± 1.1 |
-| 5★ | 2.5e-4 | 0.99 | 32 | 1.0 | 0.05 | 0.05 | **Champion performer**: Demonstrated: <br>• Fluid punch combinations <br>• Adaptive defensive maneuvers <br>• Perfect exploration/exploitation balance (438-step avg) <br>• Consistent high-level play | **24.0 ± 1.2** |
+| Trial | Learning Rate (lr) | Gamma (γ) | Batch Size | ε_start | ε_end | ε_decay | Observed Behavior | Reward (μ ± σ) |
+|-------|-------------------|-----------|------------|---------|-------|---------|-------------------|----------------|
+| 1 | 1.0e-3 | 0.99 | 32 | 1.0 | 0.1 | 0.1 | **Violent policy oscillations**:<br>- Alternated between aggressive punching (+15 reward) and defensive collapses (-5 reward)<br>- Wildly varying episode lengths (200-500 steps)<br>- No consistent rhythm | 15.2 ± 4.1 |
+| 2 | 1.0e-4 | 0.95 | 64 | 1.0 | 0.05 | 0.2 | **Overcautious jabber**:<br>- Threw single punches then retreated<br>- Failed to develop combos<br>- Predictable movement patterns (~350 step episodes) | 18.2 ± 1.5 |
+| 3 | 6.0e-4 | 0.99 | 32 | 1.0 | 0.01 | 0.15 | **Early specialist**:<br>- Quickly learned basic tactics (+20 reward by 100k steps)<br>- Stuck repeating same 2-3 punch combos<br>- No adaptation to opponent patterns | 20.1 ± 0.8 |
+| 4 | 3.0e-4 | 0.997 | 48 | 1.0 | 0.1 | 0.1 | **Calculated counter-puncher**:<br>- Excellent defensive positioning (~400 step episodes)<br>- Occasional attack hesitation<br>- Strong but suboptimal combos | 22.5 ± 1.1 |
+| **5★** | **2.5e-4** | **0.99** | **32** | **1.0** | **0.05** | **0.05** | **Champion performer**:<br>- Fluid punch combinations<br>- Adaptive defensive maneuvers<br>- Perfect exploration/exploitation balance (438-step avg)<br>- Consistent high-level play | **24.0 ± 1.2** |
+
+**Key:**
+- **μ ± σ**: Mean reward ± standard deviation across 10 evaluation episodes
+- **Episode Length**: Correlates with strategic depth (longer = better positioning)
+- **★**: Optimal configuration
 
 **Key to Performance Indicators:**
 - **μ ± σ**: Mean reward ± standard deviation across 10 evaluation episodes
@@ -62,13 +67,6 @@ We conducted rigorous experimentation with 5 distinct configurations, observing 
     }
 }
 ```
-### Performance Metrics from Training
-Our agent achieved the following results during evaluation:
-
-- Mean Episode Reward: 24.00
-- Mean Episode Length: 438 steps
-- Consistent Performance: Demonstrated stable results across multiple episodes (1.00, 2.00, 3.00 shown in evaluation)
-
 Additional observations:
 - Gamma values above 0.995 caused the agent to overvalue future rewards in this environment
 - Batch sizes smaller than 32 led to noisy updates and unstable learning
