@@ -14,7 +14,7 @@ import json
 class LocalDQNPlayer:
     """Play with trained DQN agent in local environment with GUI display."""
     
-    def _init_(self, env_name="ALE/Boxing-v5", model_path="dqn_model.zip", 
+    def __init__(self, env_name="ALE/Boxing-v5", model_path="dqn_model.zip", 
                  num_episodes=5, delay_between_actions=0.05, save_video=False):
         """
         Initialize the local DQN player.
@@ -335,8 +335,8 @@ class LocalDQNPlayer:
 class QuietDQNPlayer(LocalDQNPlayer):
     """Version with minimal console output for batch processing."""
     
-    def _init_(self, *args, **kwargs):
-        super()._init_(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         
     def play_single_episode(self, episode_number):
         """Play episode with minimal output."""
@@ -440,5 +440,5 @@ def main():
     return stats
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     results = main()
