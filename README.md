@@ -19,11 +19,16 @@ Our implementation demonstrates:
 ### Hyperparameter Tuning
 We tested multiple configurations and documented results:
 
-| Hyperparameter Set | Noted Behavior |
+ Hyperparameter Set | Noted Behavior |
 |--------------------|----------------|
-| lr=1e-3, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | High learning rate caused unstable training |
-| lr=3e-4, gamma=0.995, batch=64, ε_start=1.0, ε_end=0.05, ε_decay=0.2 | Better stability but slower convergence |
-| lr=1e-4, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | Best balance of stability and performance |
+| lr=1e-3, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | The high learning rate caused unstable training with large fluctuations in rewards. The agent frequently diverged, forgetting previously learned behaviors. Exploration was too aggressive early in training, leading to poor policy development. |
+| lr=3e-4, gamma=0.995, batch=64, ε_start=1.0, ε_end=0.05, ε_decay=0.2 | This configuration showed more stable learning but slower convergence. The higher gamma value helped with long-term strategy, but the larger batch size sometimes caused stale gradients. Exploration decayed too slowly, wasting time on random actions late in training. |
+| lr=1e-4, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | Our best configuration showed excellent balance. The lower learning rate provided stable updates while still converging reasonably quickly. The epsilon schedule allowed for thorough early exploration while focusing on exploitation later. Batch size of 32 proved optimal for our hardware constraints. |
+
+Additional observations:
+- Gamma values above 0.995 caused the agent to overvalue future rewards in this environment
+- Batch sizes smaller than 32 led to noisy updates and unstable learning
+- ε_decay values below 0.1 caused the agent to stop exploring too early
 
 ### Training Process
 The training script (`train.py`) performs:
