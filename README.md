@@ -48,3 +48,33 @@ The play script (`play.py`) provides:
 - Optional video recording
 
 ## Play Demo
+
+## Team Collaboration
+Our team of 3 members contributed as follows:
+Member 1:
+Member 2:
+Member 3:
+
+## How to Run
+
+### Training
+```bash
+python train.py
+``````
+This will:
+
+1. Compare MLP and CNN policies
+2. Perform hyperparameter tuning
+3. Train final model
+4. Save model as dqn_model.zip
+5. Generate training curves in results/
+
+### Playing
+```bash
+python play.py
+```bash
+
+Options:
+- --episodes: Number of episodes to run (default: 5)
+- --render: Render mode (default: 'human')
+- --model_path: Path to trained model (default: 'dqn_model.zip')
