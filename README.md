@@ -54,13 +54,13 @@ The play script (`play.py`) provides:
 
 ## Play Demo
 
-Linl to the demo:
+Link to the demo: [Demo Video](https://drive.google.com/file/d/1_Ep2rvDj8lOlsY1Tnc-aJ-rdsCOiX55q/view?usp=sharing)
 
 ## Team Collaboration
 Our team of 3 members contributed as follows:
-Member 1:
-Member 2:
-Member 3:
+- Member 1: Jamillah Ssozi
+- Member 2: Geu Aguto Garang Bior
+- Member 3: Peris Nyawira Wangui
 
 ## How to Run
 
@@ -82,7 +82,7 @@ python play.py
 ```
 
 Options:
-- --episodes: Number of episodes to run (default: 5)
+- --episodes: Number of episodes to run (default: 3)
 - --render: Render mode (default: 'human')
 - --model_path: Path to trained model (default: 'dqn_model.zip')
 
