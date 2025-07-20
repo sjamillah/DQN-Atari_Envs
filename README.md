@@ -72,7 +72,7 @@ This will:
 ### Playing
 ```bash
 python play.py
-```bash
+```
 
 Options:
 - --episodes: Number of episodes to run (default: 5)
