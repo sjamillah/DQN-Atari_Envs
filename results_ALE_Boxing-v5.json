@@ -1,0 +1,10 @@
+{
+  "environment": "ALE/Boxing-v5",
+  "model_path": "dqn_model.zip",
+  "configuration": {
+    "num_episodes": 3,
+    "delay_between_actions": 0.05
+  },
+  "statistics": {
+    "total_episodes": 3,
+    "mean_reward": 
