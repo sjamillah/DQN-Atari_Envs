@@ -28,7 +28,7 @@ Our implementation demonstrates:
 
 | Configuration | Observed Behavior |
 |--------------|-------------------|
-| lr=1e-3, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | High learning rate caused unstable training with reward fluctuations (±15 points). Agent frequently forgot learned behaviors. Early exploration was too aggressive, wasting 35% of initial training time. |
+| `lr=1e-3, gamma=0.99, batch=32, ε_start=1.0, ε_end=0.1, ε_decay=0.1 | High learning rate caused unstable training with reward fluctuations (±15 points). Agent frequently forgot learned behaviors. Early exploration was too aggressive, wasting 35% of initial training time.` |
 | `lr=3e-4`, `gamma=0.995`, `batch=64`, `ε_start=1.0`, `ε_end=0.05`, `ε_decay=0.2` | More stable learning but 25% slower convergence. Higher gamma helped combos but sometimes overvalued positioning. Larger batches caused 15% slower updates. |
 | `lr=5e-4`, `gamma=0.98`, `batch=48`, `ε_start=1.0`, `ε_end=0.2`, `ε_decay=0.15` | Fast initial learning (reward=15 in 50k steps) but plateaued early. Lower gamma caused punch-focused myopia rather than strategy. |
 | `lr=1e-4`, `gamma=0.99`, `batch=32`, `ε_start=1.0`, `ε_end=0.1`, `ε_decay=0.1` | **Best configuration** (24.0 mean reward). Perfect balance of exploration/exploitation. Batch size matched GPU constraints ideally. |
